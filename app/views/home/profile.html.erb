@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-3">
+    <h1 class="mb-5">Mon profil</h1>
+
+    <div class="card" style="width: 100%;">
+      <%= gravatar(@user.email, { size: 300, class: "card-img-top" }) %>
+      <div class="card-body">
+        <h5 class="card-title"><%= @user.username %></h5>
+        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet illum mollitia provident
+          quo?
+          A assumenda dicta doloribus dolorum hic impedit nihil odio officia ullam! A iure nulla quidem tempora?</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-9">
+    <h1 class="mb-5">Vos Posts</h1>
+
+    <% if @user.posts.any? %>
+      <% @user.posts.sort_by { |p| p.created_at }.reverse.each do |post| %>
+        <%= render post %>
+      <% end %>
+    <% else %>
+      <h2 class="text-center">Vous n'avez aucun Posts</h2>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div id="<%= dom_id post %>" class="card mb-3" style="width: 100%;">
+  <div class="card-header d-flex align-items-center gap-1">
+    <%= gravatar(post.user.email, { size: 24, class: "rounded-circle" }) %>
+    <%= post.user.username %> - <%= post.created_at.strftime("Créée le %d/%m/%Y (%H:%M)") %>
+  </div>
+  <div class="card-body">
+    <h4 class="card-title"><%= post.name %></h4>
+    <p class="card-text"><%= post.content %></p>
+    <% if action_name === "index" %>
+      <%= link_to "Voir ce post", post, class: "btn btn-primary" %>
+    <% end %>
+
+    <% if (action_name === "show" || action_name == "profile") && can?(:crud, post) %>
+      <div class="d-flex align-items-center gap-1">
+        <%= link_to "Éditer ce post", edit_post_path(post), class: "btn btn-primary" %>
+        <%= button_to "Supprimer ce post", post, method: :delete, class: "btn btn-danger" %>
+      </div>
+    <% end %>
+  </div>
+</div>
